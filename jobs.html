@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Ready - Job Alignment</title>
+    <meta name="description" content="Match your skills to the right job roles and discover your perfect career fit.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modern.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <div class="logo-container">
+                    <div class="logo">🎯 Career Ready</div>
+                    <div class="logo-subtext">Placement Readiness Analyzer</div>
+                </div>
+            </div>
+            <div class="nav-center">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assessment.html">Skills</a></li>
+                    <li><a href="jobs.html">Alignment</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+            <div class="nav-right" id="navAuthArea">
+                <button class="cta-btn" data-open-modal id="navLoginBtn">Log In / Sign Up</button>
+                <div class="nav-user hidden" id="navUser">
+                    <div class="nav-avatar" id="navAvatar">U</div>
+                    <span id="navUserName">User</span>
+                    <button class="nav-logout-btn" id="navLogoutBtn" title="Sign out">&#x2192;</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-hero">
+            <span class="page-hero-badge">🎯 Find Your Fit</span>
+            <h1>Job Alignment</h1>
+            <p>Select a role below to see how your skills align and get personalized recommendations.</p>
+        </div>
+
+        <div class="job-list">
+            <div class="job" onclick="selectJob('Software Engineer')">
+                <div class="job-icon">💻</div>
+                <h2>Software Engineer</h2>
+                <p>Design and build scalable software applications across the full stack.</p>
+                <div class="job-skills">
+                    <span class="job-skill-tag">JavaScript</span>
+                    <span class="job-skill-tag">Python</span>
+                    <span class="job-skill-tag">DSA</span>
+                    <span class="job-skill-tag">Algorithms</span>
+                </div>
+                <button class="job-select-btn">Check My Match →</button>
+            </div>
+
+            <div class="job" onclick="selectJob('Data Analyst')">
+                <div class="job-icon">📊</div>
+                <h2>Data Analyst</h2>
+                <p>Transform raw data into actionable insights using statistics and visualization.</p>
+                <div class="job-skills">
+                    <span class="job-skill-tag">Python</span>
+                    <span class="job-skill-tag">SQL</span>
+                    <span class="job-skill-tag">Machine Learning</span>
+                </div>
+                <button class="job-select-btn">Check My Match →</button>
+            </div>
+
+            <div class="job" onclick="selectJob('Web Developer')">
+                <div class="job-icon">🌐</div>
+                <h2>Web Developer</h2>
+                <p>Build responsive, performant websites and web applications for users worldwide.</p>
+                <div class="job-skills">
+                    <span class="job-skill-tag">HTML</span>
+                    <span class="job-skill-tag">CSS</span>
+                    <span class="job-skill-tag">JavaScript</span>
+                </div>
+                <button class="job-select-btn">Check My Match →</button>
+            </div>
+
+            <div class="job" onclick="selectJob('Machine Learning Engineer')">
+                <div class="job-icon">🤖</div>
+                <h2>ML Engineer</h2>
+                <p>Develop, train, and deploy machine learning models to solve real-world problems.</p>
+                <div class="job-skills">
+                    <span class="job-skill-tag">Python</span>
+                    <span class="job-skill-tag">ML</span>
+                    <span class="job-skill-tag">Algorithms</span>
+                </div>
+                <button class="job-select-btn">Check My Match →</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <span class="footer-logo">🎯 Career Ready</span>
+        <p>© 2026 Career Ready. Empowering careers, one skill at a time.</p>
+        <nav class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="assessment.html">Assessment</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        function selectJob(job) {
+            localStorage.setItem('selectedJob', job);
+            navigateTo('results.html');
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <script src="bg.js"></script>
+</body>
+</html>

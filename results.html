@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Ready - Your Results</title>
+    <meta name="description" content="View your skill match analysis and job alignment results.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modern.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <div class="logo-container">
+                    <div class="logo">🎯 Career Ready</div>
+                    <div class="logo-subtext">Placement Readiness Analyzer</div>
+                </div>
+            </div>
+            <div class="nav-center">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assessment.html">Skills</a></li>
+                    <li><a href="jobs.html">Alignment</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+            <div class="nav-right" id="navAuthArea">
+                <button class="cta-btn" data-open-modal id="navLoginBtn">Log In / Sign Up</button>
+                <div class="nav-user hidden" id="navUser">
+                    <div class="nav-avatar" id="navAvatar">U</div>
+                    <span id="navUserName">User</span>
+                    <button class="nav-logout-btn" id="navLogoutBtn" title="Sign out">&#x2192;</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="page-hero">
+            <span class="page-hero-badge">📈 Skill Analysis</span>
+            <h1>Your Results</h1>
+            <p>See how your skills align to your chosen role and discover where to focus next.</p>
+        </div>
+        <section class="results-summary">
+            <div id="resultsContent">
+                <!-- Content will be populated by JS -->
+            </div>
+            <div class="charts-row">
+                <div class="chart-container pie-chart">
+                    <h2>Skill Match Analysis</h2>
+                    <canvas id="matchChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    
+                    <canvas id="skillChart"></canvas>
+                </div>
+            </div>
+        </section>
+        <div class="voice-section">
+            <h2>🎤 SPEAK YOUR SKILLS NOW!</h2>
+            <p class="voice-instruction">Don't just read - TELL US what you know! Click the button and speak your skills out loud.</p>
+            <button id="voiceBtn" class="btn voice-action-btn">🎤 SPEAK NOW - ADD SKILLS</button>
+            <p id="voiceStatus" class="voice-status">Ready to listen. Click above and speak clearly.</p>
+            <div id="jobSuggestions" style="display: none;">
+                <h3 class="suggestions-title">🚀 NEW JOB MATCHES FOUND!</h3>
+                <ul id="suggestionsList" class="suggestions-list"></ul>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:2rem;">
+            <a href="resources.html" class="btn">📚 Get Study Suggestions →</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <span class="footer-logo">🎯 Career Ready</span>
+        <p>© 2026 Career Ready. Empowering careers, one skill at a time.</p>
+        <nav class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="assessment.html">Assessment</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="resources.html">Resources</a>
+        </nav>
+    </footer>
+    
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userName = localStorage.getItem('userName');
+            const userSkills = JSON.parse(localStorage.getItem('userSkills')) || [];
+            const selectedJob = localStorage.getItem('selectedJob');
+            const userExperience = localStorage.getItem('userExperience') || 0;
+            
+            if (!selectedJob || userSkills.length === 0) {
+                document.getElementById('resultsContent').innerHTML = '<p>Please complete the assessment and select a job first.</p>';
+                return;
+            }
+            
+            // Define job requirements
+            const jobRequirements = {
+                'Software Engineer': ['JavaScript', 'Python', 'Data Structures', 'Algorithms'],
+                'Data Analyst': ['Python', 'SQL', 'Data Structures', 'Machine Learning'],
+                'Web Developer': ['HTML', 'CSS', 'JavaScript', 'Python'],
+                'Machine Learning Engineer': ['Python', 'Machine Learning', 'Data Structures', 'Algorithms']
+            };
+            
+            const requiredSkills = jobRequirements[selectedJob] || [];
+            function updateGraphs() {
+                const matchPercentage = calculateMatch(userSkills, requiredSkills);
+                
+                // Get quiz score
+                const quizScore = localStorage.getItem('quizScore');
+                
+                // Classify user skills
+                const matchedSkills = userSkills.filter(skill => requiredSkills.includes(skill));
+                const missingSkills = requiredSkills.filter(skill => !userSkills.includes(skill));
+                const userOnlySkills = userSkills.filter(skill => !requiredSkills.includes(skill));
+                
+                // Generate skills tags
+                const matchedTags = matchedSkills.map(s => `<span class="skill-tag matched" title="Matched Requirement">${s}</span>`).join('');
+                const missingTags = missingSkills.map(s => `<span class="skill-tag missing" title="Missing Requirement">${s}</span>`).join('');
+                const userOnlyTags = userOnlySkills.map(s => `<span class="skill-tag user-only" title="Additional Skill">${s}</span>`).join('');
+                
+                let scoreCardHtml = '';
+                if (quizScore !== null) {
+                    const score = parseInt(quizScore);
+                    scoreCardHtml = `
+                        <div class="score-glowing-card">
+                            <div class="score-circle-container">
+                                <svg>
+                                    <defs>
+                                        <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#6366f1" />
+                                            <stop offset="100%" stop-color="#38bdf8" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle class="score-circle-bg" cx="70" cy="70" r="55" />
+                                    <circle class="score-circle-fill" cx="70" cy="70" r="55" style="stroke-dasharray: 345.57; stroke-dashoffset: ${345.57 - (345.57 * score) / 100};" />
+                                </svg>
+                                <span class="score-value">${score}%</span>
+                            </div>
+                            <h3 class="score-label">Assessment Passed</h3>
+                            <p class="score-description">Your validated technical skill & voice clarity assessment score.</p>
+                        </div>
+                    `;
+                } else {
+                    scoreCardHtml = `
+                        <div class="score-glowing-card">
+                            <div class="score-circle-container">
+                                <svg>
+                                    <circle class="score-circle-bg" cx="70" cy="70" r="55" />
+                                </svg>
+                                <span class="score-value" style="font-size: 1.5rem; color: #f43f5e;">N/A</span>
+                            </div>
+                            <h3 class="score-label" style="color: #f43f5e;">Test Incomplete</h3>
+                            <p class="score-description">You haven't completed the Technical Assessment Test yet.</p>
+                            <a href="assessment.html" class="score-missing-btn">Start Assessment Now</a>
+                        </div>
+                    `;
+                }
+
+                document.getElementById('resultsContent').innerHTML = `
+                    <div class="results-grid">
+                        <div class="profile-hero-card">
+                            <div class="profile-header-info">
+                                <h2>Hello, ${userName || 'Candidate'}!</h2>
+                                <p>We've analyzed your capabilities against the requirements for your target role.</p>
+                            </div>
+                            <div class="info-row-grid">
+                                <div class="info-capsule">
+                                    <span class="lbl">Target Position</span>
+                                    <span class="val">${selectedJob}</span>
+                                </div>
+                                <div class="info-capsule">
+                                    <span class="lbl">Experience</span>
+                                    <span class="val">${userExperience} Years</span>
+                                </div>
+                            </div>
+                            <div class="skills-comparison-box">
+                                <h4>🎯 Skills Breakdown</h4>
+                                <div class="skills-tags-wrap">
+                                    ${matchedTags || '<span class="skill-tag missing">No matched skills</span>'}
+                                    ${missingTags}
+                                    ${userOnlyTags}
+                                </div>
+                            </div>
+                        </div>
+                        ${scoreCardHtml}
+                    </div>
+                `;
+                
+                // Pie chart for match
+                
+                
+                // Bar chart: Skill Distribution according to selected domains
+                const categories = {
+                    'Frontend': ['JavaScript', 'HTML', 'CSS'],
+                    'Backend': ['Python', 'Java', 'C++', 'SQL'],
+                    'Data & ML': ['Python', 'SQL', 'Data Structures', 'Algorithms', 'Machine Learning'],
+                    'Soft Skills': ['Communication', 'Teamwork']
+                };
+                
+                const categoryCounts = {};
+                let totalCategorized = 0;
+                
+                // Tally user skills according to domain
+                userSkills.forEach(skill => {
+                    for (const [domain, skills] of Object.entries(categories)) {
+                        if (skills.includes(skill)) {
+                            categoryCounts[domain] = (categoryCounts[domain] || 0) + 1;
+                            totalCategorized++;
+                        }
+                    }
+                });
+                
+                // If no skills matched any category, fallback safely
+                if (totalCategorized === 0) totalCategorized = 1; 
+                
+                const categoryLabels = Object.keys(categoryCounts);
+                const categoryScores = categoryLabels.map(domain => {
+                    return Math.round((categoryCounts[domain] / totalCategorized) * 100);
+                });
+                
+                renderPieChart('matchChart', categoryScores, categoryLabels);
+                renderBarChart('skillChart', categoryScores, categoryLabels, 'Skill Distribution by Domain (%)');
+            }
+            
+            // Initial render
+            updateGraphs();
+            
+            // Voice recognition setup
+            const voiceBtn = document.getElementById('voiceBtn');
+            const voiceStatus = document.getElementById('voiceStatus');
+            const jobSuggestions = document.getElementById('jobSuggestions');
+            const suggestionsList = document.getElementById('suggestionsList');
+            
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                const recognition = new SpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-US';
+                
+                recognition.onstart = () => {
+                    voiceStatus.textContent = '🎤 LISTENING NOW! SPEAK YOUR SKILLS LOUD AND CLEAR!';
+                    voiceBtn.textContent = '🎤 LISTENING...';
+                };
+                
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript.toLowerCase();
+                    voiceStatus.textContent = 'YOU SAID: "' + transcript.toUpperCase() + '"';
+                    voiceBtn.textContent = '🎤 SPEAK NOW - ADD SKILLS';
+                    
+                    // Parse skills from transcript
+                    const allSkills = ['JavaScript', 'Python', 'Java', 'C++', 'HTML', 'CSS', 'SQL', 'Data Structures', 'Algorithms', 'Machine Learning', 'Communication', 'Teamwork'];
+                    const spokenSkills = allSkills.filter(skill => transcript.includes(skill.toLowerCase()));
+                    
+                    if (spokenSkills.length > 0) {
+                        // Add new skills
+                        const newSkills = spokenSkills.filter(skill => !userSkills.includes(skill));
+                        if (newSkills.length > 0) {
+                            userSkills.push(...newSkills);
+                            localStorage.setItem('userSkills', JSON.stringify(userSkills));
+                            voiceStatus.textContent += ' ✅ SKILLS ADDED: ' + newSkills.join(', ').toUpperCase();
+                            
+                            // Suggest jobs based on all skills
+                            suggestJobs(userSkills);
+                            
+                            // Update charts dynamically with the new skills!
+                            updateGraphs();
+                        } else {
+                            voiceStatus.textContent += ' ⚠️ NO NEW SKILLS DETECTED!';
+                        }
+                    } else {
+                        voiceStatus.textContent += ' ❌ NO SKILLS RECOGNIZED! TRY: PYTHON, JAVASCRIPT, HTML, CSS, ETC.';
+                    }
+                };
+                
+                recognition.onerror = (event) => {
+                    voiceStatus.textContent = '❌ ERROR: ' + event.error.toUpperCase() + ' - TRY AGAIN!';
+                    voiceBtn.textContent = '🎤 SPEAK NOW - ADD SKILLS';
+                };
+                
+                recognition.onend = () => {
+                    voiceBtn.textContent = '🎤 SPEAK NOW - ADD SKILLS';
+                };
+                
+                voiceBtn.addEventListener('click', () => {
+                    recognition.start();
+                });
+            } else {
+                voiceStatus.textContent = '❌ VOICE RECOGNITION NOT SUPPORTED! USE A MODERN BROWSER LIKE CHROME.';
+                voiceBtn.disabled = true;
+            }
+            
+            function suggestJobs(skills) {
+                const jobs = {
+                    'Software Engineer': ['JavaScript', 'Python', 'Data Structures', 'Algorithms'],
+                    'Data Analyst': ['Python', 'SQL', 'Data Structures', 'Machine Learning'],
+                    'Web Developer': ['HTML', 'CSS', 'JavaScript', 'Python'],
+                    'Machine Learning Engineer': ['Python', 'Machine Learning', 'Data Structures', 'Algorithms']
+                };
+                
+                const suggestions = Object.keys(jobs).map(job => {
+                    const match = calculateMatch(skills, jobs[job]);
+                    return { job, match };
+                }).sort((a, b) => b.match - a.match).slice(0, 3);
+                
+                suggestionsList.innerHTML = suggestions.map(s => `<li>${s.job}: ${s.match}% match</li>`).join('');
+                jobSuggestions.style.display = 'block';
+            }
+        });
+    </script>
+
+    <!-- 3D Interactive Background Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <script src="bg.js"></script>
+</body>
+</html>

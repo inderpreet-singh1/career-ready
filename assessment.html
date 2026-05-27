@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Ready - Skills Assessment</title>
+    <meta name="description" content="Take the Career Ready skills assessment to evaluate your technical and soft skills.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modern.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div class="nav-left">
+                <div class="logo-container">
+                    <div class="logo">🎯 Career Ready</div>
+                    <div class="logo-subtext">Placement Readiness Analyzer</div>
+                </div>
+            </div>
+            <div class="nav-center">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assessment.html">Skills</a></li>
+                    <li><a href="jobs.html">Alignment</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+            <div class="nav-right" id="navAuthArea">
+                <button class="cta-btn" data-open-modal id="navLoginBtn">Log In / Sign Up</button>
+                <div class="nav-user hidden" id="navUser">
+                    <div class="nav-avatar" id="navAvatar">U</div>
+                    <span id="navUserName">User</span>
+                    <button class="nav-logout-btn" id="navLogoutBtn" title="Sign out">&#x2192;</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-hero">
+            <span class="page-hero-badge">✍ Skills Evaluation</span>
+            <h1>Skills Assessment</h1>
+            <p>Tell us about yourself, select your skills, and complete the technical test to get your personalized career match.</p>
+        </div>
+
+        <form id="skillsForm">
+
+            <!-- NAME -->
+
+            <label for="name">
+                Name:
+            </label>
+
+            <input type="text"
+                   id="name"
+                   placeholder="Enter your name"
+                   required>
+
+            <!-- SKILLS -->
+
+            <div class="skill-group">
+                <p class="skill-label">Select your skills:</p>
+                <div class="skill-checkboxes">
+                    <label><input type="checkbox" name="skills" value="JavaScript"> JavaScript</label>
+                    <label><input type="checkbox" name="skills" value="Python"> Python</label>
+                    <label><input type="checkbox" name="skills" value="Java"> Java</label>
+                    <label><input type="checkbox" name="skills" value="C++"> C++</label>
+                    <label><input type="checkbox" name="skills" value="HTML"> HTML</label>
+                    <label><input type="checkbox" name="skills" value="CSS"> CSS</label>
+                    <label><input type="checkbox" name="skills" value="SQL"> SQL</label>
+                    <label><input type="checkbox" name="skills" value="Data Structures"> Data Structures</label>
+                    <label><input type="checkbox" name="skills" value="Algorithms"> Algorithms</label>
+                    <label><input type="checkbox" name="skills" value="Machine Learning"> Machine Learning</label>
+                    <label><input type="checkbox" name="skills" value="Communication"> Communication</label>
+                    <label><input type="checkbox" name="skills" value="Teamwork"> Teamwork</label>
+                </div>
+            </div>
+
+            <!-- EXPERIENCE -->
+
+            <label for="experience">
+                Years of Experience:
+            </label>
+
+            <input type="number"
+                   id="experience"
+                   min="0"
+                   placeholder="Enter years of experience"
+                   required>
+
+            <!-- START TEST -->
+
+            <section class="test-section">
+
+                <h2>
+                    🚀 Technical Assessment Test
+                </h2>
+
+                <p>
+                    Click the button below to start your
+                    Technical Knowledge Test and
+                    Voice Confidence Test.
+                </p>
+
+                <div class="assessment-actions">
+                    <button type="button"
+                            id="startTestBtn">
+
+                        Start Test
+
+                    </button>
+                    <button type="submit"
+                            class="submit-btn">
+
+                        Submit Assessment
+
+                    </button>
+                </div>
+
+            </section>
+
+        </form>
+
+        <div class="modal-overlay hidden"
+             id="testModal">
+
+            <div class="modal-card">
+
+                <button class="modal-close"
+                        id="closeTestModal">&times;</button>
+
+                <div class="modal-header">
+                    <h2>Technical Assessment Test</h2>
+                    <p class="modal-subtitle">Complete the knowledge quiz and voice confidence exercise before continuing.</p>
+                </div>
+
+                <div class="modal-body">
+
+                    <section class="test-section">
+
+                        <h2>
+                            🧠 Technical Knowledge Test
+                        </h2>
+
+                        <!-- QUESTION 1 -->
+
+                        <div class="question-box">
+
+                            <p>
+                                1. What does HTML stand for?
+                            </p>
+
+                            <label>
+                                <input type="radio"
+                                       name="q1"
+                                       value="correct">
+                                Click option A: Hyper Text Markup Language
+                            </label>
+
+                            <label>
+                                <input type="radio"
+                                       name="q1"
+                                       value="wrong">
+                                Click option B: High Transfer Machine Language
+                            </label>
+
+                        </div>
+
+                        <!-- QUESTION 2 -->
+
+                        <div class="question-box">
+
+                            <p>
+                                2. Which language is mainly used for styling web pages?
+                            </p>
+
+                            <label>
+                                <input type="radio"
+                                       name="q2"
+                                       value="correct">
+                                Click option A: CSS
+                            </label>
+
+                            <label>
+                                <input type="radio"
+                                       name="q2"
+                                       value="wrong">
+                                Click option B: Python
+                            </label>
+
+                        </div>
+
+                        <!-- QUESTION 3 -->
+
+                        <div class="question-box">
+
+                            <p>
+                                3. Which data structure uses FIFO?
+                            </p>
+
+                            <label>
+                                <input type="radio"
+                                       name="q3"
+                                       value="correct">
+                                Click option A: Queue
+                            </label>
+
+                            <label>
+                                <input type="radio"
+                                       name="q3"
+                                       value="wrong">
+                                Click option B: Stack
+                            </label>
+
+                        </div>
+
+                        <!-- QUESTION 4 -->
+
+                        <div class="question-box">
+
+                            <p>
+                                4. Which company developed Java?
+                            </p>
+
+                            <label>
+                                <input type="radio"
+                                       name="q4"
+                                       value="correct">
+                                Click option A: Sun Microsystems
+                            </label>
+
+                            <label>
+                                <input type="radio"
+                                       name="q4"
+                                       value="wrong">
+                                Click option B: Microsoft
+                            </label>
+
+                        </div>
+
+                        <!-- QUESTION 5 -->
+
+                        <div class="question-box">
+
+                            <p>
+                                5. Which keyword is used to declare variables in JavaScript?
+                            </p>
+
+                            <label>
+                                <input type="radio"
+                                       name="q5"
+                                       value="correct">
+                                Click option A: let
+                            </label>
+
+                            <label>
+                                <input type="radio"
+                                       name="q5"
+                                       value="wrong">
+                                Click option B: int
+                            </label>
+
+                        </div>
+
+                        <button type="button"
+                                id="submitQuizBtn">
+
+                            Submit Knowledge Test
+
+                        </button>
+
+                        <p id="quizResult"></p>
+
+                    </section>
+
+                    <section class="test-section">
+
+                        <h2>
+                            🎤 Voice Confidence Test
+                        </h2>
+
+                        <p>
+                            Speak about yourself and your technical skills.
+                        </p>
+
+                        <button type="button"
+                                id="confidenceBtn">
+
+                            Start Voice Test
+
+                        </button>
+
+                        <p id="confidenceResult"></p>
+
+                    </section>
+
+                </div>
+
+                <div class="modal-footer"
+                     style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1rem;">
+
+                    <button type="button"
+                            class="btn btn-secondary"
+                            id="cancelTestBtn">
+
+                        Cancel
+
+                    </button>
+
+                    <button type="button"
+                            class="btn"
+                            id="finishTestBtn"
+                            disabled>
+
+                        Finish Test
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <span class="footer-logo">🎯 Career Ready</span>
+        <p>© 2026 Career Ready. Empowering careers, one skill at a time.</p>
+        <nav class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="jobs.html">Alignment</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="resources.html">Resources</a>
+        </nav>
+    </footer>
+
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script>
+
+        // START TEST BUTTON
+
+        const startTestBtn =
+            document.getElementById("startTestBtn");
+
+        const testModal =
+            document.getElementById("testModal");
+
+        const closeTestModal =
+            document.getElementById("closeTestModal");
+
+        const cancelTestBtn =
+            document.getElementById("cancelTestBtn");
+
+        const submitQuizBtn =
+            document.getElementById("submitQuizBtn");
+
+        const finishTestBtn =
+            document.getElementById("finishTestBtn");
+
+        const confidenceBtn =
+            document.getElementById("confidenceBtn");
+
+        const confidenceResult =
+            document.getElementById("confidenceResult");
+
+        let quizCompleted = false;
+        let voiceCompleted = false;
+
+        function updateFinishButtonState() {
+            finishTestBtn.disabled = !(quizCompleted && voiceCompleted);
+        }
+
+        startTestBtn.addEventListener("click", () => {
+            testModal.classList.remove("hidden");
+            requestAnimationFrame(() => {
+                testModal.classList.add("modal-visible");
+            });
+        });
+
+        closeTestModal.addEventListener("click", () => {
+            testModal.classList.remove("modal-visible");
+            setTimeout(() => {
+                testModal.classList.add("hidden");
+            }, 250);
+        });
+
+        cancelTestBtn.addEventListener("click", () => {
+            testModal.classList.remove("modal-visible");
+            setTimeout(() => {
+                testModal.classList.add("hidden");
+            }, 250);
+        });
+
+        testModal.addEventListener("click", (event) => {
+            if (event.target === testModal) {
+                testModal.classList.remove("modal-visible");
+                setTimeout(() => {
+                    testModal.classList.add("hidden");
+                }, 250);
+            }
+        });
+
+        submitQuizBtn.addEventListener("click", calculateScore);
+
+        finishTestBtn.addEventListener("click", () => {
+            testModal.classList.remove("modal-visible");
+            setTimeout(() => {
+                testModal.classList.add("hidden");
+            }, 250);
+            startTestBtn.textContent = "Test Completed";
+            startTestBtn.disabled = false;
+        });
+
+        // QUIZ SCORE
+
+        function calculateScore() {
+            let score = 0;
+            let answeredCount = 0;
+
+            for (let i = 1; i <= 5; i++) {
+                const answer =
+                    document.querySelector(
+                        `input[name="q${i}"]:checked`
+                    );
+
+                if (answer) {
+                    answeredCount++;
+                    if (answer.value === "correct") {
+                        score++;
+                    }
+                }
+            }
+
+            if (answeredCount < 5) {
+                document.getElementById("quizResult").innerHTML =
+                    "⚠ Please answer all quiz questions before submitting.";
+                return;
+            }
+
+            const percentage =
+                (score / 5) * 100;
+
+            document.getElementById("quizResult").innerHTML =
+                `✅ You scored ${score}/5 (${percentage}%)`;
+
+            localStorage.setItem(
+                "quizScore",
+                percentage
+            );
+
+            quizCompleted = true;
+            updateFinishButtonState();
+        }
+
+        // VOICE TEST
+
+        let SpeechRecognition, recognition;
+
+        if ('webkitSpeechRecognition' in window ||
+            'SpeechRecognition' in window) {
+
+            SpeechRecognition =
+                window.SpeechRecognition ||
+                window.webkitSpeechRecognition;
+
+            recognition =
+                new SpeechRecognition();
+
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            confidenceBtn.addEventListener(
+                "click",
+                () => {
+                    confidenceResult.innerHTML =
+                        "🎤 Listening... Speak now";
+                    recognition.start();
+                }
+            );
+
+            recognition.onresult = (event) => {
+                const speech =
+                    event.results[0][0].transcript;
+
+                const words =
+                    speech.split(" ").length;
+
+                let confidence = "";
+
+                if (words > 20) {
+                    confidence =
+                        "🔥 High Confidence";
+                } else if (words > 10) {
+                    confidence =
+                        "👍 Medium Confidence";
+                } else {
+                    confidence =
+                        "⚠ Low Confidence";
+                }
+
+                confidenceResult.innerHTML =
+                    `
+                    <strong>Your Speech:</strong>
+                    ${speech}
+
+                    <br><br>
+
+                    <strong>
+                    Confidence Level:
+                    </strong>
+
+                    ${confidence}
+                    `;
+
+                localStorage.setItem(
+                    "confidenceLevel",
+                    confidence
+                );
+
+                voiceCompleted = true;
+                updateFinishButtonState();
+            }; 
+
+            recognition.onerror = () => {
+                voiceCompleted = true;
+                updateFinishButtonState();
+                confidenceResult.innerHTML =
+                    "❌ Voice recognition failed or microphone access denied. You may still finish the test.";
+            };
+        } else {
+            voiceCompleted = true;
+            confidenceResult.innerHTML =
+                "⚠ Voice recognition is not supported in this browser. You may finish the test after the quiz.";
+            updateFinishButtonState();
+        }
+
+        // FORM SUBMIT
+
+        document.getElementById('skillsForm')
+        .addEventListener('submit', function(e) {
+
+            e.preventDefault();
+
+            const name =
+                document.getElementById('name').value;
+
+            const skills = Array.from(
+                    document.querySelectorAll('input[name="skills"]:checked')
+                ).map(option => option.value);
+
+            if (skills.length === 0) {
+                showAlert('Please select at least one skill.');
+                return;
+            }
+
+            const experience =
+                document.getElementById('experience').value;
+
+            localStorage.setItem(
+                'userName',
+                name
+            );
+
+            localStorage.setItem(
+                'userSkills',
+                JSON.stringify(skills)
+            );
+
+            localStorage.setItem(
+                'userExperience',
+                experience
+            );
+
+            navigateTo('jobs.html');
+
+        });
+
+    </script>
+
+
+    <!-- 3D Interactive Background Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <script src="bg.js"></script>
+</body>
+
+</html>

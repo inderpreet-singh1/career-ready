@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Ready - Contact Us</title>
+    <meta name="description" content="Get in touch with the Career Ready team for support, partnerships, or feedback.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modern.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <div class="logo-container">
+                    <div class="logo">🎯 Career Ready</div>
+                    <div class="logo-subtext">Placement Readiness Analyzer</div>
+                </div>
+            </div>
+            <div class="nav-center">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assessment.html">Skills</a></li>
+                    <li><a href="jobs.html">Alignment</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+            <div class="nav-right" id="navAuthArea">
+                <button class="cta-btn" data-open-modal id="navLoginBtn">Log In / Sign Up</button>
+                <div class="nav-user hidden" id="navUser">
+                    <div class="nav-avatar" id="navAvatar">U</div>
+                    <span id="navUserName">User</span>
+                    <button class="nav-logout-btn" id="navLogoutBtn" title="Sign out">&#x2192;</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-hero">
+            <span class="page-hero-badge">✉ Get In Touch</span>
+            <h1>Contact Us</h1>
+            <p>Have a question, feedback, or partnership inquiry? We'd love to hear from you.</p>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-form">
+                <h2>Send us a Message</h2>
+                <form id="contactForm">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Full name" required>
+
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Tell us how we can help..." required></textarea>
+
+                    <button type="submit">Send Message →</button>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                <div class="info-item">
+                    <div class="info-icon">📧</div>
+                    <p>info@careerready.com</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <p>123 Career Street, Tech City, TC 12345</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🕐</div>
+                    <p>Mon–Fri, 9 AM – 6 PM IST</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <span class="footer-logo">🎯 Career Ready</span>
+        <p>© 2026 Career Ready. Empowering careers, one skill at a time.</p>
+        <nav class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="assessment.html">Assessment</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="blog.html">Blog</a>
+        </nav>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <script src="bg.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            btn.textContent = '✅ Message Sent!';
+            btn.disabled = true;
+            setTimeout(() => { btn.textContent = 'Send Message →'; btn.disabled = false; this.reset(); }, 3000);
+        });
+    </script>
+</body>
+</html>

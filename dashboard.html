@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Ready - Dashboard</title>
+    <meta name="description" content="Track your placement readiness progress, skill distribution, and job match scores.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modern.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard-page">
+    <header>
+        <nav>
+            <div class="nav-left">
+                <div class="logo-container">
+                    <div class="logo">🎯 Career Ready</div>
+                    <div class="logo-subtext">Placement Readiness Analyzer</div>
+                </div>
+            </div>
+            <div class="nav-center">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assessment.html">Skills</a></li>
+                    <li><a href="jobs.html">Alignment</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+            <div class="nav-right" id="navAuthArea">
+                <button class="cta-btn" data-open-modal id="navLoginBtn">Log In / Sign Up</button>
+                <div class="nav-user hidden" id="navUser">
+                    <div class="nav-avatar" id="navAvatar">U</div>
+                    <span id="navUserName">User</span>
+                    <button class="nav-logout-btn" id="navLogoutBtn" title="Sign out">&#x2192;</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-hero">
+            <span class="page-hero-badge">📊 Your Progress</span>
+            <h1>Dashboard</h1>
+            <p>A real-time snapshot of your placement readiness, skill distribution, and job alignment scores.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <h3>Skills Assessed</h3>
+                <p id="skillsCount">0</p>
+                <div class="progress-bar"><div class="progress-fill" id="skillsProgress"></div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <h3>Jobs Matched</h3>
+                <p id="jobsMatched">0</p>
+                <div class="progress-bar"><div class="progress-fill" id="jobsProgress"></div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <h3>Average Match</h3>
+                <p id="avgMatch">0%</p>
+                <div class="progress-bar"><div class="progress-fill" id="matchProgress"></div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <h3>Experience Level</h3>
+                <p id="expLevel">Beginner</p>
+                <div class="progress-bar"><div class="progress-fill" id="expProgress"></div></div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container">
+                <h2>Skill Distribution</h2>
+                <canvas id="progressChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2>Profile Breakdown</h2>
+                <canvas id="distributionChart"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <span class="footer-logo">🎯 Career Ready</span>
+        <p>© 2026 Career Ready. Empowering careers, one skill at a time.</p>
+        <nav class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="assessment.html">Assessment</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userSkills = JSON.parse(localStorage.getItem('userSkills')) || [];
+            const userExperience = localStorage.getItem('userExperience') || 0;
+            const selectedJob = localStorage.getItem('selectedJob');
+            document.getElementById('skillsCount').textContent = userSkills.length;
+            const quizScore = parseInt(localStorage.getItem('quizScore')) || 0;
+            const jobRequirements = {
+                'Software Engineer': ['JavaScript', 'Python', 'Data Structures', 'Algorithms'],
+                'Data Analyst': ['Python', 'SQL', 'Machine Learning'],
+                'Web Developer': ['HTML', 'CSS', 'JavaScript'],
+                'Machine Learning Engineer': ['Python', 'Machine Learning', 'Algorithms']
+            };
+            let matchPercentage = quizScore;
+            if (selectedJob && jobRequirements[selectedJob]) {
+                const reqs = jobRequirements[selectedJob];
+                let matches = 0;
+                reqs.forEach(s => { if (userSkills.includes(s)) matches++; });
+                matchPercentage = Math.round((matches / reqs.length) * 100);
+            }
+            document.getElementById('avgMatch').textContent = matchPercentage + '%';
+            document.getElementById('matchProgress').style.width = matchPercentage + '%';
+            const exp = parseInt(userExperience);
+            document.getElementById('expLevel').textContent = exp < 2 ? 'Beginner' : exp < 5 ? 'Intermediate' : 'Advanced';
+            let totalJobsMatched = 0;
+            const totalAvailableJobs = Object.keys(jobRequirements).length || 4;
+            for (const [job, reqs] of Object.entries(jobRequirements)) {
+                let matches = 0;
+                reqs.forEach(s => { if (userSkills.includes(s)) matches++; });
+                if (Math.round((matches / reqs.length) * 100) >= 50) totalJobsMatched++;
+            }
+            document.getElementById('jobsMatched').textContent = totalJobsMatched;
+            document.getElementById('skillsProgress').style.width = Math.min(userSkills.length * 20, 100) + '%';
+            document.getElementById('jobsProgress').style.width = (totalJobsMatched / totalAvailableJobs) * 100 + '%';
+            document.getElementById('matchProgress').style.width = matchPercentage + '%';
+            document.getElementById('expProgress').style.width = Math.min(exp * 20, 100) + '%';
+            const categories = {
+                'Technical': ['JavaScript', 'HTML', 'CSS', 'Python', 'Java', 'C++', 'SQL'],
+                'Soft Skills': ['Communication', 'Teamwork'],
+                'Domain': ['Data Structures', 'Algorithms', 'Machine Learning']
+            };
+            const categoryCounts = {};
+            let totalCategorized = 0;
+            userSkills.forEach(skill => {
+                for (const [domain, skills] of Object.entries(categories)) {
+                    if (skills.includes(skill)) {
+                        categoryCounts[domain] = (categoryCounts[domain] || 0) + 1;
+                        totalCategorized++;
+                    }
+                }
+            });
+            if (totalCategorized === 0) totalCategorized = 1;
+            const distributionLabels = Object.keys(categories);
+            const distributionScores = distributionLabels.map(domain => Math.round(((categoryCounts[domain] || 0) / totalCategorized) * 100));
+            distributionLabels.push('Experience');
+            distributionScores.push(Math.min(100, exp * 20));
+            renderPieChart('progressChart', distributionScores, distributionLabels);
+            renderBarChart('distributionChart', distributionScores, distributionLabels, 'Profile Distribution (%)');
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <script src="bg.js"></script>
+</body>
+</html>

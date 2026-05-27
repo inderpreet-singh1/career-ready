@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Ready - Study Resources</title>
+    <meta name="description" content="Curated learning resources to help you fill skill gaps and land your dream job.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modern.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <div class="logo-container">
+                    <div class="logo">🎯 Career Ready</div>
+                    <div class="logo-subtext">Placement Readiness Analyzer</div>
+                </div>
+            </div>
+            <div class="nav-center">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assessment.html">Skills</a></li>
+                    <li><a href="jobs.html">Alignment</a></li>
+                    <li><a href="results.html">Results</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+            <div class="nav-right" id="navAuthArea">
+                <button class="cta-btn" data-open-modal id="navLoginBtn">Log In / Sign Up</button>
+                <div class="nav-user hidden" id="navUser">
+                    <div class="nav-avatar" id="navAvatar">U</div>
+                    <span id="navUserName">User</span>
+                    <button class="nav-logout-btn" id="navLogoutBtn" title="Sign out">&#x2192;</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-hero">
+            <span class="page-hero-badge">📚 Learn & Grow</span>
+            <h1>Study Resources</h1>
+            <p>Curated, hand-picked resources across every skill domain to close your gaps and level up fast.</p>
+        </div>
+
+        <div id="suggestions"></div>
+
+        <div class="resources">
+            <div class="resource-category">
+                <h3>💻 Programming Languages</h3>
+                <ul>
+                    <li><a href="https://www.python.org/" target="_blank">Python Official Site</a> — Learn Python from the ground up</li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN JavaScript</a> — Comprehensive JS documentation</li>
+                    <li><a href="https://www.java.com/" target="_blank">Java</a> — Java language tutorials and guides</li>
+                    <li><a href="https://docs.oracle.com/en/java/" target="_blank">Oracle Java Docs</a> — Advanced Java documentation</li>
+                    <li><a href="https://www.codecademy.com/" target="_blank">Codecademy</a> — Interactive coding lessons for beginners</li>
+                </ul>
+            </div>
+
+            <div class="resource-category">
+                <h3>🧠 Data Structures & Algorithms</h3>
+                <ul>
+                    <li><a href="https://www.geeksforgeeks.org/data-structures/" target="_blank">GeeksforGeeks DSA</a> — Comprehensive guide with examples</li>
+                    <li><a href="https://leetcode.com/" target="_blank">LeetCode</a> — Practice interview-level coding problems</li>
+                    <li><a href="https://www.hackerrank.com/" target="_blank">HackerRank</a> — Competitive coding challenges</li>
+                    <li><a href="https://www.codechef.com/" target="_blank">CodeChef</a> — Competitive programming contests</li>
+                    <li><a href="https://www.interviewbit.com/" target="_blank">InterviewBit</a> — Structured interview preparation</li>
+                </ul>
+            </div>
+
+            <div class="resource-category">
+                <h3>🌐 Web Development</h3>
+                <ul>
+                    <li><a href="https://www.freecodecamp.org/" target="_blank">freeCodeCamp</a> — Free full-stack development curriculum</li>
+                    <li><a href="https://www.w3schools.com/" target="_blank">W3Schools</a> — HTML, CSS, and JS reference</li>
+                    <li><a href="https://developer.mozilla.org/" target="_blank">MDN Web Docs</a> — The definitive web dev reference</li>
+                    <li><a href="https://reactjs.org/" target="_blank">React Documentation</a> — Official React framework docs</li>
+                    <li><a href="https://nodejs.org/" target="_blank">Node.js</a> — Server-side JavaScript runtime</li>
+                </ul>
+            </div>
+
+            <div class="resource-category">
+                <h3>🤖 Machine Learning & AI</h3>
+                <ul>
+                    <li><a href="https://www.coursera.org/learn/machine-learning" target="_blank">Coursera ML Course</a> — Andrew Ng's legendary ML course</li>
+                    <li><a href="https://scikit-learn.org/" target="_blank">Scikit-Learn</a> — Python ML library with great docs</li>
+                    <li><a href="https://www.tensorflow.org/" target="_blank">TensorFlow</a> — Google's deep learning framework</li>
+                    <li><a href="https://pytorch.org/" target="_blank">PyTorch</a> — Facebook's flexible ML framework</li>
+                </ul>
+            </div>
+
+            <div class="resource-category">
+                <h3>👥 Soft Skills & Leadership</h3>
+                <ul>
+                    <li><a href="https://www.linkedin.com/learning/" target="_blank">LinkedIn Learning</a> — Communication and leadership courses</li>
+                    <li><a href="https://www.udemy.com/" target="_blank">Udemy</a> — Teamwork, leadership, and management</li>
+                    <li><a href="https://www.khanacademy.org/" target="_blank">Khan Academy</a> — Free courses across all domains</li>
+                    <li><a href="https://www.toastmasters.org/" target="_blank">Toastmasters</a> — Public speaking and presentation skills</li>
+                    <li><a href="https://www.mindtools.com/" target="_blank">MindTools</a> — Leadership and management skills</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <span class="footer-logo">🎯 Career Ready</span>
+        <p>© 2026 Career Ready. Empowering careers, one skill at a time.</p>
+        <nav class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="assessment.html">Assessment</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="blog.html">Blog</a>
+        </nav>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userSkills = JSON.parse(localStorage.getItem('userSkills')) || [];
+            const selectedJob = localStorage.getItem('selectedJob');
+            const jobRequirements = {
+                'Software Engineer': ['JavaScript', 'Python', 'Data Structures', 'Algorithms'],
+                'Data Analyst': ['Python', 'SQL', 'Data Structures', 'Machine Learning'],
+                'Web Developer': ['HTML', 'CSS', 'JavaScript', 'Python'],
+                'Machine Learning Engineer': ['Python', 'Machine Learning', 'Data Structures', 'Algorithms']
+            };
+            const requiredSkills = jobRequirements[selectedJob] || [];
+            const missingSkills = requiredSkills.filter(skill => !userSkills.includes(skill));
+            if (missingSkills.length > 0) {
+                let html = '<h2>⚠ Skills to Improve for ' + (selectedJob || 'your role') + '</h2><ul>';
+                missingSkills.forEach(skill => { html += `<li>${skill} — study from the resources below</li>`; });
+                html += '</ul>';
+                document.getElementById('suggestions').innerHTML = html;
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <script src="bg.js"></script>
+</body>
+</html>
